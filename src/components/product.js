@@ -20,13 +20,23 @@ export class ProductComponent extends React.Component {
 
         console.log("Component Did Mount called ")
     }
+    componentDidCatch(){
+        console.log("Error occured")
+    }
+    componentWillMount(){
+        console.log("Componnent will mount")
+    }
     render(){
         const { resData } = this.state;
         console.log(resData)
         return (
             <div>
-                    this.state.responseData[0]
-                }
+               {
+                   this.state.responseData.map(record => (
+                       <li>{record.Name}</li>
+                   
+                   ))
+               }
             </div>
         )
     }
