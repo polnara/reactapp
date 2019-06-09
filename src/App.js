@@ -5,11 +5,38 @@ import Account from './components/account';
 import  {BrowserRouter,Switch,Route,Link} from 'react-router-dom';
 import { Register } from './components/register';
 import { ProductComponent } from './components/product';
-function App() {
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+const initialState = {
+  amount : 10000
+}
+
+function accountReducer(state=initialState , action){
+  console.log(action);
+  switch(action.type){
+    case 'WITHDRAW':
+      return {
+        amount:action.amount
+      }
+    case  'DEPOSIT':
+      return {
+        amount:action.amount
+      }
+    default :
+      return state;
+
+  }
+  
+}
+
+const accountStore = createStore(accountReducer);
+
+const App = () => {
 
   return (
     <div className="App">
       <header className="App-header">
+        <Provider store={accountStore}>
          <BrowserRouter>
             <Switch>
               <Fragment>
@@ -22,7 +49,7 @@ function App() {
               </Fragment>
             </Switch>
          </BrowserRouter>
-       
+       </Provider>
       </header>
     </div>
   );
